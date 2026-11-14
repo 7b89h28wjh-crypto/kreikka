@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Γεια! Kreikkaa suomalaisille</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;800&family=Noto+Serif:wght@700&display=swap">
+<style>
+:root{--bg:#f2f6f8;--card:#fff;--ink:#14263d;--mute:#5d6e82;--blue:#1d5fa8;--blue-d:#144578;--ok:#2f8a4e;--okbg:#e1f3e7;--bad:#c23b3b;--badbg:#fbe4e4;--line:#d5e0e8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b2a;--card:#182739;--ink:#e8eef5;--mute:#93a5ba;--blue:#5b9be0;--blue-d:#3d7fc4;--ok:#5cc37e;--okbg:#17382a;--bad:#ef7a7a;--badbg:#3d2024;--line:#2a3d52}}
+:root[data-theme="dark"]{--bg:#0f1b2a;--card:#182739;--ink:#e8eef5;--mute:#93a5ba;--blue:#5b9be0;--blue-d:#3d7fc4;--ok:#5cc37e;--okbg:#17382a;--bad:#ef7a7a;--badbg:#3d2024;--line:#2a3d52}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Commissioner",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:520px;margin:0 auto;padding:20px 18px 40px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+h1{font-family:"Noto Serif",Georgia,serif;font-size:3.6rem;line-height:1.1;margin:8px 0 4px;color:var(--blue);font-weight:700}
+h1:after{content:"";display:block;height:12px;margin-top:8px;background:var(--blue);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='12'%3E%3Cpath d='M0 11H2V1H12V8H5V4H8' fill='none' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='12'%3E%3Cpath d='M0 11H2V1H12V8H5V4H8' fill='none' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x}
+.wod{background:var(--blue-d);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:16px}.wod span{display:block;opacity:.85;font-size:.9rem}.wod b{display:block;font-family:"Noto Serif",Georgia,serif;font-size:2rem;line-height:1.3}.wod .x{color:#fff;font-size:1.2rem}
+.sub{color:var(--mute);margin:0 0 18px}
+.stats{display:flex;gap:10px;margin-bottom:22px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:6px 14px 14px 6px;padding:10px 12px}
+.stat b{display:block;font-size:1.3rem}.stat span{color:var(--mute);font-size:.85rem}
+.path{position:relative;padding-left:22px}
+.path:before{content:"";position:absolute;left:7px;top:14px;bottom:14px;width:3px;background:var(--line);border-radius:2px}
+.unit{position:relative;display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.unit:before{content:"";position:absolute;left:-22px;top:50%;margin-top:-8px;width:17px;height:17px;border-radius:50%;background:var(--card);border:3px solid var(--blue)}
+.unit.done:before{background:var(--ok);border-color:var(--ok)}
+.unit strong{display:block;font-size:1.1rem}.unit small{color:var(--mute)}
+.unit .gr{float:right;font-family:"Noto Serif",Georgia,serif;font-size:1.4rem;color:var(--blue);font-weight:700}.unit.done{border-color:var(--ok)}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.x{background:none;border:0;font-size:1.6rem;color:var(--mute);padding:4px 8px}
+.bar{flex:1;height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--blue);transition:width .3s}
+.hearts{font-weight:700;color:var(--bad);min-width:42px;text-align:right}
+.prompt{color:var(--mute);margin:0 0 6px}
+.q{font-family:"Noto Serif",Georgia,serif;font-size:2.2rem;font-weight:700;margin:0 0 4px;line-height:1.25}
+.lv{font-family:"Noto Serif",Georgia,serif;font-size:1.25rem;margin:26px 0 14px}.lv small{display:block;font-family:"Commissioner",system-ui,sans-serif;font-weight:400;font-size:.85rem;color:var(--mute)}.unit[disabled]{opacity:.45;cursor:default}
+.ro{color:var(--mute);margin:0 0 20px;min-height:1.5em}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:12px;font-size:1.1rem;box-shadow:0 3px 0 var(--line)}
+.opt:hover{border-color:var(--blue)}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.ans{min-height:58px;border-bottom:2px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;padding-bottom:10px;margin-bottom:16px}
+.tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{background:var(--card);border:2px solid var(--line);border-radius:10px;padding:8px 14px;font-size:1.15rem}
+.tile[disabled]{opacity:.3}
+.btn{display:block;width:100%;background:var(--blue);color:#fff;border:0;border-radius:12px;padding:14px;font-weight:700;font-size:1.05rem;margin-top:18px;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+.btn[disabled]{background:var(--line);color:var(--mute);cursor:default}
+.fb{margin-top:16px;padding:14px 16px;border-radius:12px;font-weight:600}
+.fb.ok{background:var(--okbg);color:var(--ok)}.fb.bad{background:var(--badbg);color:var(--bad)}
+.fb span{display:block;font-weight:400;color:var(--ink)}
+.end{text-align:center;padding-top:40px}.end .big{font-family:"Noto Serif",Georgia,serif;font-size:3.6rem;font-weight:700;color:var(--blue);line-height:1.1;animation:pop .45s}@keyframes pop{from{transform:scale(.7);opacity:0}}
+.ghost{background:none;border:0;color:var(--mute);text-decoration:underline;margin-top:24px;display:block;width:100%}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}.end .big{animation:none}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+var U=[
+{id:'u0',t:'Kreikan aakkoset',g:'Αβγ',only:1,pa:'Miten tämä kirjain äännetään?',w:[['Β β','vita','v'],['Δ δ','ðelta','ð (pehmeä th, kuten englannin this)'],['Θ θ','thita','θ (kova th, kuten englannin think)'],['Η η','ita','i'],['Ξ ξ','ksi','ks'],['Ψ ψ','psi','ps'],['Φ φ','fi','f'],['Χ χ','hi','h'],['Ρ ρ','ro','r (rullaava)'],['Ω ω','omega','o']]},
+{id:'u1',t:'Tervehdykset',g:'Γεια',w:[['Γεια σου','ja sou','Hei'],['Καλημέρα','kalimera','Hyvää huomenta'],['Καλησπέρα','kalispera','Hyvää iltaa'],['Ευχαριστώ','efharisto','Kiitos'],['Παρακαλώ','parakalo','Ole hyvä'],['Ναι','ne','Kyllä'],['Όχι','ohi','Ei'],['Συγγνώμη','signomi','Anteeksi']]},
+{id:'u2',t:'Ruoka ja juoma',g:'Νερό',w:[['νερό','nero','vesi'],['ψωμί','psomi','leipä'],['γάλα','gala','maito'],['τυρί','tiri','juusto'],['μήλο','milo','omena'],['καφές','kafes','kahvi'],['κρασί','krasi','viini'],['ψάρι','psari','kala']]},
+{id:'u4',t:'Numerot',g:'Ένα',w:[['ένα','ena','yksi'],['δύο','dio','kaksi'],['τρία','tria','kolme'],['τέσσερα','tessera','neljä'],['πέντε','pente','viisi'],['έξι','exi','kuusi'],['επτά','efta','seitsemän'],['οκτώ','ohto','kahdeksan'],['εννιά','ennia','yhdeksän'],['δέκα','deka','kymmenen']]},
+{id:'u5',t:'Perhe',g:'Μαμά',w:[['μαμά','mama','äiti'],['μπαμπάς','babas','isä'],['αδελφός','adelfos','veli'],['αδελφή','adelfi','sisko'],['γιαγιά','giagia','isoäiti'],['παππούς','pappous','isoisä'],['παιδί','pedi','lapsi'],['φίλος','filos','ystävä']]},
+{id:'u6',t:'Värit',g:'Μπλε',w:[['κόκκινο','kokkino','punainen'],['μπλε','ble','sininen'],['πράσινο','prasino','vihreä'],['κίτρινο','kitrino','keltainen'],['άσπρο','aspro','valkoinen'],['μαύρο','mavro','musta'],['πορτοκαλί','portokali','oranssi'],['ροζ','roz','pinkki']]},
+{id:'u7',t:'Paikat ja matkailu',g:'Θάλασσα',w:[['θάλασσα','thalassa','meri'],['σπίτι','spiti','koti'],['σχολείο','sholio','koulu'],['δρόμος','dromos','katu'],['αεροδρόμιο','aerodromio','lentokenttä'],['εστιατόριο','estiatorio','ravintola'],['παραλία','paralia','ranta'],['ταβέρνα','taverna','taverna']]},
+{id:'u9',t:'Tärkeimmät verbit',g:'Έχω',w:[['θέλω','thelo','haluan'],['έχω','eho','minulla on'],['είμαι','ime','olen'],['πάω','pao','menen'],['τρώω','troo','syön'],['πίνω','pino','juon'],['μιλάω','milao','puhun'],['αγαπώ','agapo','rakastan']]},
+{id:'u10',t:'Viikonpäivät',g:'Σάββατο',w:[['Δευτέρα','theftera','maanantai'],['Τρίτη','triti','tiistai'],['Τετάρτη','tetarti','keskiviikko'],['Πέμπτη','pempti','torstai'],['Παρασκευή','paraskevi','perjantai'],['Σάββατο','savato','lauantai'],['Κυριακή','kiriaki','sunnuntai'],['σήμερα','simera','tänään'],['αύριο','avrio','huomenna']]},
+{id:'u11',t:'Aika ja sää',g:'Ήλιος',w:[['πρωί','proi','aamu'],['μεσημέρι','mesimeri','keskipäivä'],['βράδυ','vrathi','ilta'],['νύχτα','nihta','yö'],['ήλιος','ilios','aurinko'],['βροχή','vrohi','sade'],['ζέστη','zesti','kuumuus'],['κρύο','krio','kylmä']]},
+{id:'u13',t:'Keho ja terveys',g:'Καρδιά',w:[['κεφάλι','kefali','pää'],['χέρι','heri','käsi'],['πόδι','pothi','jalka'],['μάτι','mati','silmä'],['στόμα','stoma','suu'],['καρδιά','karthia','sydän'],['γιατρός','giatros','lääkäri'],['πονάω','ponao','minuun sattuu']]},
+{id:'u14',t:'Kaupat ja vaatteet',g:'Φόρεμα',w:[['παντελόνι','pantaloni','housut'],['πουκάμισο','poukamiso','kauluspaita'],['φόρεμα','forema','mekko'],['παπούτσια','papoutsia','kengät'],['καπέλο','kapelo','hattu'],['τσάντα','tsanta','laukku'],['μαγαζί','magazi','kauppa'],['τιμή','timi','hinta']]},
+{id:'u16',t:'Eläimet',g:'Γάτα',w:[['σκύλος','skilos','koira'],['γάτα','gata','kissa'],['άλογο','alogo','hevonen'],['πουλί','pouli','lintu'],['αγελάδα','agelatha','lehmä'],['γουρούνι','gourouni','sika'],['ελάφι','elafi','peura'],['λύκος','likos','susi']]},
+{id:'u17',t:'Koti',g:'Πόρτα',w:[['πόρτα','porta','ovi'],['παράθυρο','parathiro','ikkuna'],['τραπέζι','trapezi','pöytä'],['καρέκλα','karekla','tuoli'],['κρεβάτι','kreveti','sänky'],['κουζίνα','kouzina','keittiö'],['μπάνιο','banio','kylpyhuone'],['κήπος','kipos','puutarha']]},
+{id:'u18',t:'Hedelmät ja vihannekset',g:'Μπανάνα',w:[['πορτοκάλι','portokali','appelsiini'],['μπανάνα','banana','banaani'],['σταφύλι','stafili','viinirypäle'],['ντομάτα','domata','tomaatti'],['πατάτα','patata','peruna'],['αγγούρι','aguri','kurkku'],['λεμόνι','lemoni','sitruuna'],['καρπούζι','karpouzi','vesimeloni']]},
+{id:'u19',t:'Ammatit',g:'Δάσκαλος',w:[['δάσκαλος','thaskalos','opettaja'],['νοσοκόμα','nosokoma','sairaanhoitaja'],['μάγειρας','mayiras','kokki'],['οδηγός','othigos','kuljettaja'],['αστυνομικός','astinomikos','poliisi'],['αγρότης','agrotis','maanviljelijä'],['φοιτητής','fititis','opiskelija'],['μηχανικός','mihanikos','insinööri']]},
+{id:'u20',t:'Liikenne',g:'Τρένο',w:[['αυτοκίνητο','aftokinito','auto'],['λεωφορείο','leoforio','bussi'],['τρένο','treno','juna'],['αεροπλάνο','aeroplano','lentokone'],['πλοίο','plio','laiva'],['ποδήλατο','pothilato','polkupyörä'],['ταξί','taxi','taksi'],['σταθμός','stathmos','asema']]},
+{id:'u21',t:'Kuvailevat sanat',g:'Καλός',w:[['μεγάλος','megalos','suuri'],['μικρός','mikros','pieni'],['καλός','kalos','hyvä'],['κακός','kakos','paha'],['όμορφος','omorfos','kaunis'],['ζεστός','zestos','lämmin'],['γρήγορος','grigoros','nopea'],['αργός','argos','hidas']]},
+{id:'u22',t:'Kysymyssanat',g:'Τι;',w:[['τι','ti','mitä'],['ποιος','pios','kuka'],['πού','pou','missä'],['πότε','pote','milloin'],['γιατί','giati','miksi'],['πώς','pos','miten'],['πόσο','poso','paljonko'],['ποιο','pio','mikä']]},
+{id:'u3',t:'Ensimmäiset lauseet',g:'Θέλω',s:[['Θέλω νερό','Haluan vettä',['ψωμί','είμαι']],['Είμαι Φινλανδός','Olen suomalainen',['Έλληνας','θέλω']],['Μιλάω ελληνικά','Puhun kreikkaa',['φινλανδικά','νερό']],['Πού είναι το ξενοδοχείο;','Missä hotelli on?',['νερό','θέλω']],['Θέλω έναν καφέ','Haluan kahvin',['ψωμί','είμαι']],['Ευχαριστώ πολύ','Kiitos paljon',['παρακαλώ','ναι']]]},
+{id:'u8',t:'Perheen kanssa',g:'Αγάπη',s:[['Τι κάνεις;','Mitä kuuluu?',['καλά','είμαι']],['Είμαι καλά','Minulla on hyvä olo',['κάνεις','Τι']],['Πώς σε λένε;','Mikä sinun nimesi on?',['κάνεις','Τι']],['Σε αγαπώ','Rakastan sinua',['μαμά','θέλω']],['Καλή όρεξη','Hyvää ruokahalua',['νερό','Καλημέρα']],['Χρόνια πολλά','Paljon onnea',['Ευχαριστώ','Καλή']],['Καληνύχτα μαμά','Hyvää yötä äiti',['μπαμπά','Καλημέρα']]]},
+{id:'u12',t:'Juhlat ja arki',g:'Πάσχα',s:[['Καλό Πάσχα','Hyvää pääsiäistä',['Χρόνια','νερό']],['Καλά Χριστούγεννα','Hyvää joulua',['Πάσχα','ναι']],['Καλό ταξίδι','Hyvää matkaa',['Πάσχα','όχι']],['Σήμερα είναι Σάββατο','Tänään on lauantai',['αύριο','Κυριακή']],['Πάω στη θάλασσα','Menen merelle',['σπίτι','θέλω']],['Έχω δύο αδέλφια','Minulla on kaksi sisarusta',['τρία','είμαι']],['Μου αρέσει ο καφές','Pidän kahvista',['νερό','θέλω']]]},
+{id:'u15',t:'Ravintola, taksi ja lääkäri',g:'Λογαριασμό',s:[['Έναν καφέ παρακαλώ','Yksi kahvi, kiitos',['νερό','θέλω']],['Τον λογαριασμό παρακαλώ','Laskun, kiitos',['καφέ','ναι']],['Πόσο κάνει;','Paljonko se maksaa?',['είναι','Πού']],['Θέλω ένα τραπέζι','Haluan pöydän',['καφέ','δύο']],['Στο αεροδρόμιο παρακαλώ','Lentokentälle, kiitos',['σπίτι','θέλω']],['Δεν καταλαβαίνω','En ymmärrä',['Μιλάω','ναι']],['Πονάει το κεφάλι μου','Päätäni särkee',['χέρι','είμαι']]]},
+{id:'u23',t:'Keskustelua',g:'Μιλάμε',s:[['Πόσο χρονών είσαι;','Minkä ikäinen olet?',['κάνεις','Τι']],['Μένω στη Φινλανδία','Asun Suomessa',['Ελλάδα','θέλω']],['Μου αρέσει η Ελλάδα','Pidän Kreikasta',['καφές','Φινλανδία']],['Δεν ξέρω','En tiedä',['ναι','Είμαι']],['Μπορείς να με βοηθήσεις;','Voitko auttaa minua?',['θέλω','νερό']],['Χαίρομαι που σε γνωρίζω','Hauska tutustua',['Καλημέρα','είμαι']]]}
+];
+var LV=[{t:'Alkeet',u:['u0','u1','u2','u4','u3']},{t:'Arki',u:['u5','u6','u9','u10','u8']},{t:'Matkailu',u:['u7','u11','u14','u15','u13']},{t:'Pidemmälle',u:['u16','u17','u18','u19','u20','u21','u22','u12','u23']}];
+var S={xp:0,streak:0,last:'',done:{}};
+try{var r=localStorage.getItem('kreikka');if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+function save(){try{localStorage.setItem('kreikka',JSON.stringify(S))}catch(e){}}
+function day(o){var d=new Date();d.setDate(d.getDate()+(o||0));return d.toDateString()}
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var $=document.getElementById('app'),L=null;
+function esc(s){return String(s).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+
+function home(){
+ L=null;
+ var live=S.last===day()||S.last===day(-1)?S.streak:0;
+ var h='<h1>Γεια!</h1><p class="sub">Opi kreikkaa suomen kielellä. Pieni askel joka päivä.</p>'+wod()+
+ '<div class="stats"><div class="stat"><b>'+live+'</b><span>päivän putki</span></div><div class="stat"><b>'+S.xp+'</b><span>XP</span></div></div><div class="path">';
+ h+='</div>';
+ LV.forEach(function(lv,li){
+  var us=lv.u.map(function(id){return U.filter(function(x){return x.id===id})[0]});
+  var nd=us.filter(function(u){return S.done[u.id]}).length;
+  var open=li===0||LV[li-1].u.filter(function(id){return S.done[id]}).length>=Math.ceil(LV[li-1].u.length/2);
+  h+='<h3 class="lv">Taso '+(li+1)+': '+lv.t+'<small>'+(open?nd+'/'+us.length+' suoritettu':'Lukittu. Suorita puolet edellisen tason oppitunneista.')+'</small></h3><div class="path">';
+  us.forEach(function(u){h+='<button class="unit'+(S.done[u.id]?' done':'')+'"'+(open?'':' disabled')+' data-u="'+u.id+'"><span class="gr">'+u.g+'</span><strong>'+u.t+'</strong><small>'+(S.done[u.id]?'Suoritettu, kertaa uudelleen':'Aloita oppitunti')+'</small></button>'});
+  h+='</div>';
+ });
+ $.innerHTML=h+'</div>';
+ $.querySelectorAll('.unit').forEach(function(b){b.onclick=function(){start(b.dataset.u)}});
+ var ws=$.querySelector('#wsp');if(ws)ws.onclick=function(){say(WD[0])};
+}
+
+function build(u){
+ var q=[];
+ if(u.w){
+  shuf(u.w).slice(0,8).forEach(function(w,i){
+   var others=shuf(u.w.filter(function(x){return x!==w})).slice(0,3);
+   if(i%2===0||u.only)q.push({k:'c',p:u.pa||'Mitä tämä tarkoittaa?',sp:!u.only,q:w[0],ro:w[1],a:w[2],o:shuf([w[2]].concat(others.map(function(x){return x[2]})))});
+   else q.push({k:'c',p:'Valitse kreikaksi: '+w[2],q:w[2],ro:'',a:w[0],o:shuf([w[0]].concat(others.map(function(x){return x[0]}))),ans:w[1]});
+  });
+ }else{
+  shuf(u.s).forEach(function(s,i){var l=i%3===1;q.push({k:'t',lis:l,p:l?'Kuuntele ja rakenna lause':'Käännä kreikaksi',q:l?s[0]:s[1],a:s[0],tiles:shuf(s[0].split(' ').concat(s[2]))})});
+ }
+ if(u.w)q.push({k:'m',p:'Yhdistä parit',pairs:shuf(u.w).slice(0,4)});
+ if(u.w&&u.id!=='u0')shuf(u.w).slice(0,2).forEach(function(w,i){var o=shuf(u.w.filter(function(x){return x!==w})).slice(0,3);q.splice(2+i*3,0,i?{k:'c',lis:1,p:'Kuuntele ja valitse sana',q:w[0],a:w[0],o:shuf([w[0]].concat(o.map(function(x){return x[0]})))}:{k:'c',lis:1,p:'Kuuntele ja valitse merkitys',q:w[0],a:w[2],o:shuf([w[2]].concat(o.map(function(x){return x[2]})))})});
+ return q;
+}
+
+function start(id){
+ var u=U.filter(function(x){return x.id===id})[0];
+ L={u:u,q:build(u),i:0,hp:5,ok:0,sel:[],locked:false};
+ show();
+}
+
+function show(){
+ var q=L.q[L.i];if(q.k==='m')return match(q);
+ var h='<div class="top"><button class="x" aria-label="Lopeta" id="quit">✕</button><div class="bar"><i style="width:'+(L.i/L.q.length*100)+'%"></i></div><div class="hearts">♥ '+L.hp+'</div></div>'+
+ '<p class="prompt">'+esc(q.p)+'</p>';
+ if(q.k==='c'){
+  h+='<p class="q">'+(q.lis?'':esc(q.q))+(q.sp||q.lis?' <button class="x" id="spk" aria-label="Kuuntele">🔊</button>':'')+'</p><p class="ro">'+esc(q.ro||'')+'</p>';
+  q.o.forEach(function(o,i){h+='<button class="opt" data-o="'+i+'">'+esc(o)+'</button>'});
+ }else{
+  h+='<p class="q">'+(q.lis?'<button class="x" id="spk" style="font-size:2.4rem" aria-label="Kuuntele">🔊</button>':esc(q.q))+'</p><p class="ro"></p><div class="ans" id="ans"></div><div class="tiles" id="tiles"></div><button class="btn" id="chk" disabled>Tarkista</button>';
+ }
+ h+='<div id="fb"></div>';
+ $.innerHTML=h;
+ $.querySelector('#quit').onclick=home;
+ var sk=$.querySelector('#spk');if(sk)sk.onclick=function(){say(q.q)};if(q.lis)say(q.q);
+ L.locked=false;L.sel=[];
+ if(q.k==='c'){
+  $.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+   if(L.locked)return;
+   var v=q.o[+b.dataset.o];b.classList.add(v===q.a?'ok':'bad');
+   if(v!==q.a)$.querySelectorAll('.opt').forEach(function(x){if(q.o[+x.dataset.o]===q.a)x.classList.add('ok')});
+   finish(v===q.a,q.a+(q.ans?' ('+q.ans+')':''));if(q.ans)say(q.a);
+  }});
+ }else tiles(q);
+}
+
+function say(t){try{var m=new SpeechSynthesisUtterance(t);m.lang='el-GR';m.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(m)}catch(e){}}
+function tb(){return '<div class="top"><button class="x" aria-label="Lopeta" id="quit">✕</button><div class="bar"><i style="width:'+(L.i/L.q.length*100)+'%"></i></div><div class="hearts">♥ '+L.hp+'</div></div>'}
+function match(q){
+ $.innerHTML=tb()+'<p class="prompt">Yhdistä parit. Valitse ensin kreikkalainen sana ja sitten sen merkitys.</p><div style="display:flex;gap:10px"><div style="flex:1" id="ml"></div><div style="flex:1" id="mr"></div></div><div id="fb"></div>';
+ $.querySelector('#quit').onclick=home;L.locked=false;
+ var ML=$.querySelector('#ml'),MR=$.querySelector('#mr'),sel=null,n=0;
+ function add(box,txt,p,side){var b=document.createElement('button');b.className='opt';b.textContent=txt;b.onclick=function(){
+  if(b.disabled||L.locked)return;
+  if(side==='l'){say(p[0]);ML.querySelectorAll('.opt').forEach(function(x){x.style.borderColor=''});b.style.borderColor='var(--blue)';sel={p:p,b:b};return}
+  if(!sel)return;
+  if(sel.p===p){sel.b.classList.add('ok');b.classList.add('ok');sel.b.disabled=true;b.disabled=true;sel=null;if(++n===q.pairs.length)finish(true,'')}
+  else{b.classList.add('bad');setTimeout(function(){b.classList.remove('bad')},500);L.hp--;$.querySelector('.hearts').textContent='♥ '+Math.max(L.hp,0);if(L.hp<=0)over(false)}
+ };box.appendChild(b)}
+ q.pairs.forEach(function(p){add(ML,p[0],p,'l')});
+ shuf(q.pairs).forEach(function(p){add(MR,p[2],p,'r')});
+}
+var WD=null;
+function wod(){var a=[];U.forEach(function(u){if(u.w&&u.id!=='u0')a=a.concat(u.w)});var d=new Date();WD=a[(d.getFullYear()*366+d.getMonth()*31+d.getDate())%a.length];return '<div class="wod"><span>Päivän sana</span><b>'+WD[0]+' <button class="x" id="wsp" aria-label="Kuuntele">🔊</button></b><span>'+WD[1]+' · '+WD[2]+'</span></div>'}
+function tiles(q){
+ var A=$.querySelector('#ans'),T=$.querySelector('#tiles'),C=$.querySelector('#chk');
+ function draw(){
+  A.innerHTML='';T.innerHTML='';
+  L.sel.forEach(function(ix,k){var b=document.createElement('button');b.className='tile';b.textContent=q.tiles[ix];b.onclick=function(){if(L.locked)return;L.sel.splice(k,1);draw()};A.appendChild(b)});
+  q.tiles.forEach(function(w,ix){var b=document.createElement('button');b.className='tile';b.textContent=w;b.disabled=L.sel.indexOf(ix)>-1;b.onclick=function(){if(L.locked)return;L.sel.push(ix);draw()};T.appendChild(b)});
+  C.disabled=!L.sel.length;
+ }
+ draw();
+ C.onclick=function(){
+  if(L.locked)return;
+  var got=L.sel.map(function(i){return q.tiles[i]}).join(' ');
+  C.style.display='none';
+  finish(got===q.a,q.a);say(q.a);
+ };
+}
+
+function finish(ok,correct){
+ L.locked=true;
+ if(ok)L.ok++;else L.hp--;
+ var fb=$.querySelector('#fb');
+ fb.innerHTML='<div class="fb '+(ok?'ok':'bad')+'">'+(ok?'Oikein!':'Ei ihan.')+(ok?'':'<span>Oikea vastaus: '+esc(correct)+'</span>')+'</div><button class="btn" id="next">Jatka</button>';
+ $.querySelector('.hearts').textContent='♥ '+Math.max(L.hp,0);
+ var n=$.querySelector('#next');n.focus();
+ n.onclick=function(){
+  if(L.hp<=0)return over(false);
+  L.i++;
+  if(L.i>=L.q.length)return over(true);
+  show();
+ };
+}
+
+function over(win){
+ var u=L.u,gain=0;
+ if(win){
+  gain=L.ok*10;S.xp+=gain;S.done[u.id]=true;
+  if(S.last!==day()){S.streak=S.last===day(-1)?S.streak+1:1;S.last=day()}
+  save();
+ }
+ $.innerHTML='<div class="end"><div class="big">'+(win?'Μπράβο!':'Ωχ!')+'</div><h2>'+(win?'Hyvin tehty!':'Sydämet loppuivat')+'</h2><p class="sub">'+(win?'Sait '+gain+' XP ja putkesi on '+S.streak+' päivää.':'Kokeile oppituntia uudelleen, se onnistuu.')+'</p><button class="btn" id="again">'+(win?'Takaisin polulle':'Yritä uudelleen')+'</button></div>';
+ $.querySelector('#again').onclick=function(){win?home():start(u.id)};
+}
+home();
+</script>
+</body>
+</html>
